@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="id4"></div>
+<div id="id5"></div>
+<script>
+ // console.log(location.href)
+
+  const jsonpost = new URL(location).searchParams.get('post')
+
+  let post1 = JSON.parse(jsonpost)
+
+ let divid4 = document.getElementById('id4')
+
+ divid4.innerText = JSON.stringify(post1,null,2)
+ divid4.style.textAlign = 'center'
+ divid4.style.background = 'LimeGreen'
+ divid4.style.borderRadius = '100px'
+
+
+ fetch(`https://jsonplaceholder.typicode.com/posts/${post1.id}/comments`)
+    .then(value => value.json())
+    .then(value => {
+        let divid5 = document.getElementById('id5')
+        for (let comment of value){
+            // console.log(comment);
+            let usercomment = document.createElement('div')
+            usercomment.innerText = comment.name
+            divid5.appendChild(usercomment)
+
+            divid5.style.display = 'flex'
+            divid5.style.flexWrap = 'wrap'
+            divid5.style.marginTop = '30px'
+            usercomment.style.width = '23%'
+            usercomment.style.background = 'Orange'
+            usercomment.style.margin = '20px 5px'
+            usercomment.style.textAlign = 'center'
+            usercomment.style.borderRadius = '10px'
+
+
+
+
+        }
+    })
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
+
+
+
+
